@@ -1,6 +1,7 @@
 import streamlit as st
 import json
 import pandas as pd
+import base64
 from utils import load_json, validate_json
 from evaluation import evaluate_rag
 from config import OPENAI_MODELS
@@ -30,8 +31,9 @@ def main():
                 if st.button("Evaluate"):
                     if api_key:
                         with st.spinner("Evaluating..."):
-                            results = evaluate_rag(data, api_key, model)
-                        display_results(results)
+                            results = evaluate_rag_with_progress(data, api_key, model)
+                        display_results_table(results)
+                        provide_download_button(results)
                     else:
                         st.error("Please enter your OpenAI API key in the sidebar.")
             else:
@@ -46,11 +48,63 @@ def display_json_data(data):
     st.dataframe(df)
 
 
-def display_results(results):
-    st.subheader("Evaluation Results")
+def evaluate_rag_with_progress(data, api_key, model):
+    results_list = []
+    metrics = [
+        "Faithfulness",
+        "Context Precision",
+        "Relevance",
+        "Context Recall",
+        "Context Relevancy",
+        "Context Entities Recall",
+        "Answer Semantic Similarity",
+        "Answer Correctness",
+    ]
+
+    status_text = st.empty()
+
+    status_text.text("Evaluating...")
+    results = evaluate_rag(data, api_key, model)
+
     for metric, result in results.items():
-        st.metric(label=metric, value=f"{result['score']:.2f}")
-        st.text(f"Reason: {result['reason']}")
+        results_list.append(
+            {"metric": metric, "score": result["score"], "reason": result["reason"]}
+        )
+
+    status_text.text("Evaluation complete!")
+    return results_list
+
+
+def display_results_table(results):
+    st.subheader("Evaluation Results")
+
+    df = pd.DataFrame(
+        [
+            (result["metric"], result["score"], result["reason"])
+            for result in results
+        ],
+        columns=["Metric", "Score", "Reason"],
+    )
+    st.table(df)
+
+
+def provide_download_button(results):
+    df = pd.DataFrame(
+        [
+            (result["metric"], result["score"], result["reason"])
+            for result in results
+        ],
+        columns=["Metric", "Score", "Reason"]
+    )
+    
+    csv = df.to_csv(index=False)
+    
+    st.download_button(
+        label="Download Results CSV",
+        data=csv,
+        file_name="evaluation_results.csv",
+        mime="text/csv"
+    )
 
 
 if __name__ == "__main__":

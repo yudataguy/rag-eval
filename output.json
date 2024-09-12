@@ -1,0 +1,180 @@
+{
+    "query": {
+        "text": "Can you provide examples of tasks or problems that require the use of algorithms? ",
+        "original": "Which parts need algorithm?",
+        "keyword": {
+            "search_terms": [
+                "provide",
+                "example",
+                "task",
+                "problem",
+                "require",
+                "use",
+                "algorithm"
+            ],
+            "original_terms": [
+                "Can",
+                "you",
+                "provide",
+                "examples",
+                "of",
+                "tasks",
+                "or",
+                "problems",
+                "that",
+                "require",
+                "the",
+                "use",
+                "of",
+                "algorithms",
+                "?"
+            ]
+        }
+    },
+    "folder_path": "test_md",
+    "output_file_path": "test_md/output.json",
+    "files": [
+        {
+            "content": [
+                "# RAG System Improvement Roadmap ## Level 1: Basic RAG Implementation 1. File System Traversal - [ ] Implement recursive traversal of the file system to generate text - [ ] Ensure proper handling of different file types and encodings 2. Text Chunking - [ ] Develop a generator for efficient text chunking - [ ] Experiment with different chunking strategies (e. g. , fixed- [ ]size, sentence- [ ]based, paragraph- [ ]based) 3. Embedding Generation - [ ] Create a generator for batching requests to the embedding API - [ ] Implement asynchronous sending of batched requests for improved performance 4. Data Storage - [ ] Set up vector database for storing embedded data - [ ] Design an efficient schema for quick retrieval 5. Query Interface - [ ] Develop a CLI for: - [ ] Querying the system - [ ] Embedding questions - [ ] Retrieving relevant text chunks - [ ] Generating responses 6. Pipeline Creation - [ ] Implement three core pipelines: - [ ] Processing pipeline - [ ] Search pipeline",
+                "- [ ] Answer pipeline ## Level 2: Structured Processing Enhancements 1. Processing Improvements - [ ] Optimize Asyncio usage for better concurrency - [ ] Refine chunking algorithms for improved context preservation - [ ] Implement robust retry mechanisms for API calls and data processing 2. Search Enhancements - [ ] Integrate advanced ranking algorithms (e. g. , Cohere) - [ ] Implement query expansion and rewriting techniques - [ ] Develop parallel query processing for faster results 3. Answer Generation Upgrades - [ ] Implement citation of specific text chunks in responses - [ ] Develop a streaming response model for better structure and real- [ ]time feedback ## Level 3: Observability Implementation 1. Comprehensive Event Tracking - [ ] Set up logging for: - [ ] Query rewriting processes - [ ] Citations and sources used - [ ] Cosine similarity scores and reranker scores - [ ] Metadata for searches 2. Monitoring and Alerting",
+                "- [ ] Implement real- [ ]time monitoring of system performance - [ ] Set up alerts for anomalies or performance issues ## Level 4: Evaluation Systems 1. Search System Evaluation - [ ] Develop metrics for assessing search accuracy and relevance - [ ] Implement automated testing of search functionality 2. Answer System Evaluation - [ ] Create benchmarks for answer quality and coherence - [ ] Establish a feedback loop for continuous improvement 3. User Feedback Integration - [ ] Design and implement a user feedback system - [ ] Develop processes for incorporating feedback into system improvements ## Level 5: Shortcoming Analysis 1. Query Clustering - [ ] Implement clustering algorithms to group similar queries - [ ] Analyze clusters to identify: a. Common topics b. Required system capabilities 2. Capability Gap Analysis - [ ] Map current system capabilities to identified query clusters - [ ] Prioritize development of missing capabilities ## Level 6: Advanced Data Handling 1.",
+                "Data Segmentation and Routing - [ ] Develop algorithms for identifying distinct data segments - [ ] Create intelligent routing mechanisms for efficient data processing 2. Table Processing - [ ] Implement strategies for parsing and understanding tabular data - [ ] Develop methods for integrating table information into responses 3. Image Processing Integration - [ ] Incorporate image analysis capabilities into the RAG system - [ ] Develop techniques for linking image content with textual information ## Level 7: Query Enhancement Techniques 1. Timeline Query Construction - [ ] Develop algorithms for generating queries across different time frames - [ ] Implement methods for integrating temporal context into responses 2. Metadata Enrichment - [ ] Design a system for attaching additional metadata to queries and documents - [ ] Develop techniques for leveraging metadata in improving response accuracy ## Level 8: Advanced Summarization 1. Summary Generation",
+                "- [ ] Implement algorithms for creating concise summaries of large datasets - [ ] Develop methods for maintaining context and accuracy in summaries 2. Summary Indices - [ ] Create an indexing system for efficient retrieval of summaries - [ ] Implement techniques for updating summaries as new data is added ## Level 9: Business Outcome Modeling 1. Outcome Prediction Models - [ ] Develop predictive models using RAG- [ ]generated insights - [ ] Implement techniques for integrating business metrics into the RAG system 2. Decision Support Systems - [ ] Create interfaces for presenting RAG- [ ]based predictions to decision- [ ]makers - [ ] Develop methods for explaining model predictions and recommendations ## Extra - [ ] Fine-tune embedding model for RAG"
+            ],
+            "metadata": {
+                "author": "John Doe",
+                "date": "2024-02-01",
+                "version": "1.0.0",
+                "file_path": "test_md/roadmap.md",
+                "chunk_index": 0
+            }
+        }
+    ],
+    "retrieval": {
+        "embedding": [
+            {
+                "content": "- [ ] Implement real- [ ]time monitoring of system performance - [ ] Set up alerts for anomalies or performance issues ## Level 4: Evaluation Systems 1. Search System Evaluation - [ ] Develop metrics for assessing search accuracy and relevance - [ ] Implement automated testing of search functionality 2. Answer System Evaluation - [ ] Create benchmarks for answer quality and coherence - [ ] Establish a feedback loop for continuous improvement 3. User Feedback Integration - [ ] Design and implement a user feedback system - [ ] Develop processes for incorporating feedback into system improvements ## Level 5: Shortcoming Analysis 1. Query Clustering - [ ] Implement clustering algorithms to group similar queries - [ ] Analyze clusters to identify: a. Common topics b. Required system capabilities 2. Capability Gap Analysis - [ ] Map current system capabilities to identified query clusters - [ ] Prioritize development of missing capabilities ## Level 6: Advanced Data Handling 1.",
+                "distance": 1.3090894222259521,
+                "metadata": {
+                    "author": "John Doe",
+                    "date": "2024-02-01",
+                    "file_path": "test_md/roadmap.md",
+                    "version": "1.0.0",
+                    "ids": "cdfc1991-e63a-4177-b215-e5029352670b",
+                    "embeddings": null,
+                    "uris": null,
+                    "data": null,
+                    "included": [
+                        "metadatas",
+                        "documents",
+                        "distances"
+                    ]
+                }
+            },
+            {
+                "content": "Data Segmentation and Routing - [ ] Develop algorithms for identifying distinct data segments - [ ] Create intelligent routing mechanisms for efficient data processing 2. Table Processing - [ ] Implement strategies for parsing and understanding tabular data - [ ] Develop methods for integrating table information into responses 3. Image Processing Integration - [ ] Incorporate image analysis capabilities into the RAG system - [ ] Develop techniques for linking image content with textual information ## Level 7: Query Enhancement Techniques 1. Timeline Query Construction - [ ] Develop algorithms for generating queries across different time frames - [ ] Implement methods for integrating temporal context into responses 2. Metadata Enrichment - [ ] Design a system for attaching additional metadata to queries and documents - [ ] Develop techniques for leveraging metadata in improving response accuracy ## Level 8: Advanced Summarization 1. Summary Generation",
+                "distance": 1.3815832138061523,
+                "metadata": {
+                    "author": "John Doe",
+                    "date": "2024-02-01",
+                    "file_path": "test_md/roadmap.md",
+                    "version": "1.0.0",
+                    "ids": "f1b57afd-749b-4d0b-921d-2fdc760f4504",
+                    "embeddings": null,
+                    "uris": null,
+                    "data": null,
+                    "included": [
+                        "metadatas",
+                        "documents",
+                        "distances"
+                    ]
+                }
+            },
+            {
+                "content": "- [ ] Answer pipeline ## Level 2: Structured Processing Enhancements 1. Processing Improvements - [ ] Optimize Asyncio usage for better concurrency - [ ] Refine chunking algorithms for improved context preservation - [ ] Implement robust retry mechanisms for API calls and data processing 2. Search Enhancements - [ ] Integrate advanced ranking algorithms (e. g. , Cohere) - [ ] Implement query expansion and rewriting techniques - [ ] Develop parallel query processing for faster results 3. Answer Generation Upgrades - [ ] Implement citation of specific text chunks in responses - [ ] Develop a streaming response model for better structure and real- [ ]time feedback ## Level 3: Observability Implementation 1. Comprehensive Event Tracking - [ ] Set up logging for: - [ ] Query rewriting processes - [ ] Citations and sources used - [ ] Cosine similarity scores and reranker scores - [ ] Metadata for searches 2. Monitoring and Alerting",
+                "distance": 1.4060914516448975,
+                "metadata": {
+                    "author": "John Doe",
+                    "date": "2024-02-01",
+                    "file_path": "test_md/roadmap.md",
+                    "version": "1.0.0",
+                    "ids": "e49cdb92-be53-4327-9647-58e39ffe9dea",
+                    "embeddings": null,
+                    "uris": null,
+                    "data": null,
+                    "included": [
+                        "metadatas",
+                        "documents",
+                        "distances"
+                    ]
+                }
+            }
+        ],
+        "bm25": [
+            {
+                "content": "- [ ] Implement real- [ ]time monitoring of system performance - [ ] Set up alerts for anomalies or performance issues ## Level 4: Evaluation Systems 1. Search System Evaluation - [ ] Develop metrics for assessing search accuracy and relevance - [ ] Implement automated testing of search functionality 2. Answer System Evaluation - [ ] Create benchmarks for answer quality and coherence - [ ] Establish a feedback loop for continuous improvement 3. User Feedback Integration - [ ] Design and implement a user feedback system - [ ] Develop processes for incorporating feedback into system improvements ## Level 5: Shortcoming Analysis 1. Query Clustering - [ ] Implement clustering algorithms to group similar queries - [ ] Analyze clusters to identify: a. Common topics b. Required system capabilities 2. Capability Gap Analysis - [ ] Map current system capabilities to identified query clusters - [ ] Prioritize development of missing capabilities ## Level 6: Advanced Data Handling 1.",
+                "score": 2.3024059421076655,
+                "metadata": {
+                    "author": "John Doe",
+                    "date": "2024-02-01",
+                    "version": "1.0.0",
+                    "file_path": "test_md/roadmap.md",
+                    "chunk_index": 0
+                }
+            },
+            {
+                "content": "# RAG System Improvement Roadmap ## Level 1: Basic RAG Implementation 1. File System Traversal - [ ] Implement recursive traversal of the file system to generate text - [ ] Ensure proper handling of different file types and encodings 2. Text Chunking - [ ] Develop a generator for efficient text chunking - [ ] Experiment with different chunking strategies (e. g. , fixed- [ ]size, sentence- [ ]based, paragraph- [ ]based) 3. Embedding Generation - [ ] Create a generator for batching requests to the embedding API - [ ] Implement asynchronous sending of batched requests for improved performance 4. Data Storage - [ ] Set up vector database for storing embedded data - [ ] Design an efficient schema for quick retrieval 5. Query Interface - [ ] Develop a CLI for: - [ ] Querying the system - [ ] Embedding questions - [ ] Retrieving relevant text chunks - [ ] Generating responses 6. Pipeline Creation - [ ] Implement three core pipelines: - [ ] Processing pipeline - [ ] Search pipeline",
+                "score": 1.7882652883454009,
+                "metadata": {
+                    "author": "John Doe",
+                    "date": "2024-02-01",
+                    "version": "1.0.0",
+                    "file_path": "test_md/roadmap.md",
+                    "chunk_index": 0
+                }
+            },
+            {
+                "content": "- [ ] Implement algorithms for creating concise summaries of large datasets - [ ] Develop methods for maintaining context and accuracy in summaries 2. Summary Indices - [ ] Create an indexing system for efficient retrieval of summaries - [ ] Implement techniques for updating summaries as new data is added ## Level 9: Business Outcome Modeling 1. Outcome Prediction Models - [ ] Develop predictive models using RAG- [ ]generated insights - [ ] Implement techniques for integrating business metrics into the RAG system 2. Decision Support Systems - [ ] Create interfaces for presenting RAG- [ ]based predictions to decision- [ ]makers - [ ] Develop methods for explaining model predictions and recommendations ## Extra - [ ] Fine-tune embedding model for RAG",
+                "score": 1.460614010716929,
+                "metadata": {
+                    "author": "John Doe",
+                    "date": "2024-02-01",
+                    "version": "1.0.0",
+                    "file_path": "test_md/roadmap.md",
+                    "chunk_index": 0
+                }
+            }
+        ],
+        "rerank": {
+            "content": [
+                "Data Segmentation and Routing - [ ] Develop algorithms for identifying distinct data segments - [ ] Create intelligent routing mechanisms for efficient data processing 2. Table Processing - [ ] Implement strategies for parsing and understanding tabular data - [ ] Develop methods for integrating table information into responses 3. Image Processing Integration - [ ] Incorporate image analysis capabilities into the RAG system - [ ] Develop techniques for linking image content with textual information ## Level 7: Query Enhancement Techniques 1. Timeline Query Construction - [ ] Develop algorithms for generating queries across different time frames - [ ] Implement methods for integrating temporal context into responses 2. Metadata Enrichment - [ ] Design a system for attaching additional metadata to queries and documents - [ ] Develop techniques for leveraging metadata in improving response accuracy ## Level 8: Advanced Summarization 1. Summary Generation",
+                "- [ ] Implement algorithms for creating concise summaries of large datasets - [ ] Develop methods for maintaining context and accuracy in summaries 2. Summary Indices - [ ] Create an indexing system for efficient retrieval of summaries - [ ] Implement techniques for updating summaries as new data is added ## Level 9: Business Outcome Modeling 1. Outcome Prediction Models - [ ] Develop predictive models using RAG- [ ]generated insights - [ ] Implement techniques for integrating business metrics into the RAG system 2. Decision Support Systems - [ ] Create interfaces for presenting RAG- [ ]based predictions to decision- [ ]makers - [ ] Develop methods for explaining model predictions and recommendations ## Extra - [ ] Fine-tune embedding model for RAG",
+                "# RAG System Improvement Roadmap ## Level 1: Basic RAG Implementation 1. File System Traversal - [ ] Implement recursive traversal of the file system to generate text - [ ] Ensure proper handling of different file types and encodings 2. Text Chunking - [ ] Develop a generator for efficient text chunking - [ ] Experiment with different chunking strategies (e. g. , fixed- [ ]size, sentence- [ ]based, paragraph- [ ]based) 3. Embedding Generation - [ ] Create a generator for batching requests to the embedding API - [ ] Implement asynchronous sending of batched requests for improved performance 4. Data Storage - [ ] Set up vector database for storing embedded data - [ ] Design an efficient schema for quick retrieval 5. Query Interface - [ ] Develop a CLI for: - [ ] Querying the system - [ ] Embedding questions - [ ] Retrieving relevant text chunks - [ ] Generating responses 6. Pipeline Creation - [ ] Implement three core pipelines: - [ ] Processing pipeline - [ ] Search pipeline",
+                "- [ ] Answer pipeline ## Level 2: Structured Processing Enhancements 1. Processing Improvements - [ ] Optimize Asyncio usage for better concurrency - [ ] Refine chunking algorithms for improved context preservation - [ ] Implement robust retry mechanisms for API calls and data processing 2. Search Enhancements - [ ] Integrate advanced ranking algorithms (e. g. , Cohere) - [ ] Implement query expansion and rewriting techniques - [ ] Develop parallel query processing for faster results 3. Answer Generation Upgrades - [ ] Implement citation of specific text chunks in responses - [ ] Develop a streaming response model for better structure and real- [ ]time feedback ## Level 3: Observability Implementation 1. Comprehensive Event Tracking - [ ] Set up logging for: - [ ] Query rewriting processes - [ ] Citations and sources used - [ ] Cosine similarity scores and reranker scores - [ ] Metadata for searches 2. Monitoring and Alerting",
+                "- [ ] Implement real- [ ]time monitoring of system performance - [ ] Set up alerts for anomalies or performance issues ## Level 4: Evaluation Systems 1. Search System Evaluation - [ ] Develop metrics for assessing search accuracy and relevance - [ ] Implement automated testing of search functionality 2. Answer System Evaluation - [ ] Create benchmarks for answer quality and coherence - [ ] Establish a feedback loop for continuous improvement 3. User Feedback Integration - [ ] Design and implement a user feedback system - [ ] Develop processes for incorporating feedback into system improvements ## Level 5: Shortcoming Analysis 1. Query Clustering - [ ] Implement clustering algorithms to group similar queries - [ ] Analyze clusters to identify: a. Common topics b. Required system capabilities 2. Capability Gap Analysis - [ ] Map current system capabilities to identified query clusters - [ ] Prioritize development of missing capabilities ## Level 6: Advanced Data Handling 1."
+            ],
+            "score": [
+                0.036631368,
+                0.004150081,
+                0.0036642202,
+                0.00305151,
+                0.00041406954
+            ],
+            "index": [
+                3,
+                2,
+                1,
+                4,
+                0
+            ]
+        }
+    },
+    "generate": {
+        "answer": "Certainly! Here are some examples of tasks or problems that require the use of algorithms:\n\n* **Data Segmentation and Routing:**  Algorithms are crucial for identifying distinct data segments and creating efficient routing mechanisms for data processing. This is essential for handling large datasets and ensuring optimal performance.\n* **Table Processing:** Algorithms are needed to parse and understand tabular data, extract meaningful information, and integrate it into responses. This is vital for working with structured data.\n* **Image Processing Integration:** Algorithms are used for image analysis, linking image content with textual information, and enhancing the understanding of visual data.\n* **Timeline Query Construction:** Algorithms are required to generate queries across different time frames and integrate temporal context into responses. This is important for analyzing data over time.\n* **Metadata Enrichment:** Algorithms are used to attach additional metadata to queries and documents, leveraging this information to improve response accuracy.\n* **Summary Generation:** Algorithms are essential for creating concise summaries of large datasets while maintaining context and accuracy.\n* **Outcome Prediction Models:** Algorithms are used to develop predictive models based on insights generated by the RAG system, integrating business metrics for decision-making.\n* **Decision Support Systems:** Algorithms are used to create interfaces for presenting RAG-based predictions to decision-makers, explaining model predictions and recommendations.\n\nThese are just a few examples. Algorithms are fundamental to many tasks and problems, enabling efficient data processing, analysis, and decision-making.",
+        "sources": [
+            "Data Segmentation and Routing - [ ] Develop algorithms for identifying distinct data segments - [ ] Create intelligent routing mechanisms for efficient data processing 2. Table Processing - [ ] Implement strategies for parsing and understanding tabular data - [ ] Develop methods for integrating table information into responses 3. Image Processing Integration - [ ] Incorporate image analysis capabilities into the RAG system - [ ] Develop techniques for linking image content with textual information ## Level 7: Query Enhancement Techniques 1. Timeline Query Construction - [ ] Develop algorithms for generating queries across different time frames - [ ] Implement methods for integrating temporal context into responses 2. Metadata Enrichment - [ ] Design a system for attaching additional metadata to queries and documents - [ ] Develop techniques for leveraging metadata in improving response accuracy ## Level 8: Advanced Summarization 1. Summary Generation",
+            "# RAG System Improvement Roadmap ## Level 1: Basic RAG Implementation 1. File System Traversal - [ ] Implement recursive traversal of the file system to generate text - [ ] Ensure proper handling of different file types and encodings 2. Text Chunking - [ ] Develop a generator for efficient text chunking - [ ] Experiment with different chunking strategies (e. g. , fixed- [ ]size, sentence- [ ]based, paragraph- [ ]based) 3. Embedding Generation - [ ] Create a generator for batching requests to the embedding API - [ ] Implement asynchronous sending of batched requests for improved performance 4. Data Storage - [ ] Set up vector database for storing embedded data - [ ] Design an efficient schema for quick retrieval 5. Query Interface - [ ] Develop a CLI for: - [ ] Querying the system - [ ] Embedding questions - [ ] Retrieving relevant text chunks - [ ] Generating responses 6. Pipeline Creation - [ ] Implement three core pipelines: - [ ] Processing pipeline - [ ] Search pipeline"
+        ]
+    }
+}
