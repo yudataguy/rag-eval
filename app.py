@@ -5,11 +5,12 @@ import base64
 from utils import load_json, validate_json
 from evaluation import evaluate_rag
 from config import OPENAI_MODELS
+import asyncio
 
 st.set_page_config(layout="wide", page_title="RAG Evaluation App")
 
 
-def main():
+async def main():
     st.title("RAG Evaluation App")
 
     # Sidebar
@@ -31,7 +32,7 @@ def main():
                 if st.button("Evaluate"):
                     if api_key:
                         with st.spinner("Evaluating..."):
-                            results = evaluate_rag_with_progress(data, api_key, model)
+                            results = await evaluate_rag_with_progress(data, api_key, model)
                         display_results_table(results)
                         provide_download_button(results)
                     else:
@@ -48,23 +49,13 @@ def display_json_data(data):
     st.dataframe(df)
 
 
-def evaluate_rag_with_progress(data, api_key, model):
+async def evaluate_rag_with_progress(data, api_key, model):
     results_list = []
-    metrics = [
-        "Faithfulness",
-        "Context Precision",
-        "Relevance",
-        "Context Recall",
-        "Context Relevancy",
-        "Context Entities Recall",
-        "Answer Semantic Similarity",
-        "Answer Correctness",
-    ]
 
     status_text = st.empty()
 
     status_text.text("Evaluating...")
-    results = evaluate_rag(data, api_key, model)
+    results = await evaluate_rag(data, api_key, model)
 
     for metric, result in results.items():
         results_list.append(
@@ -108,4 +99,4 @@ def provide_download_button(results):
 
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())

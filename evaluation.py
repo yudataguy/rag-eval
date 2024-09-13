@@ -1,9 +1,8 @@
 # evaluation.py
 
-import json
 from typing import Dict, Any, List
 
-from openai import OpenAI
+from openai import AsyncOpenAI
 from pydantic import BaseModel
 
 
@@ -11,16 +10,16 @@ client = None  # Global variable to store the OpenAI client
 
 
 class EvaluationResult(BaseModel):
-    score: float
     reason: str
+    score: float
 
 
 def initialize_client(api_key: str):
     global client
-    client = OpenAI(api_key=api_key)
+    client = AsyncOpenAI(api_key=api_key)
 
 
-def evaluate_rag(data: Dict[str, Any], api_key: str, model: str) -> Dict[str, float]:
+async def evaluate_rag(data: Dict[str, Any], api_key: str, model: str) -> Dict[str, float]:
 
     initialize_client(api_key)
 
@@ -30,36 +29,36 @@ def evaluate_rag(data: Dict[str, Any], api_key: str, model: str) -> Dict[str, fl
     ground_truth = data.get("ground_truth")  # Now it's None if not present
 
     results = {
-        "Faithfulness": evaluate_faithfulness(query, answer, context, model),
-        "Context Precision": evaluate_context_precision(query, answer, context, model),
-        "Relevance": evaluate_relevance(query, answer, context, model),
-        "Context Recall": evaluate_context_recall(answer, context, model),
-        "Context Relevancy": evaluate_context_relevancy(query, context, model),
+        "Faithfulness": await evaluate_faithfulness(query, answer, context, model),
+        "Context Precision": await evaluate_context_precision(query, answer, context, model),
+        "Relevance": await evaluate_relevance(query, answer, context, model),
+        "Context Recall": await evaluate_context_recall(answer, context, model),
+        "Context Relevancy": await evaluate_context_relevancy(query, context, model),
     }
 
     # Only include evaluations that require ground truth if it's available
     if ground_truth:
         results.update({
-            "Context Entities Recall": evaluate_context_entities_recall(
+            "Context Entities Recall": await evaluate_context_entities_recall(
                 ground_truth, context, model
             ),
-            "Answer Semantic Similarity": evaluate_answer_semantic_similarity(
+            "Answer Semantic Similarity": await evaluate_answer_semantic_similarity(
                 answer, ground_truth, model
             ),
-            "Answer Correctness": evaluate_answer_correctness(answer, ground_truth, model),
+            "Answer Correctness": await evaluate_answer_correctness(answer, ground_truth, model),
         })
 
     return results
 
 
-def generate_response(system_prompt: str, user_prompt: str, model: str) -> Dict:
+async def generate_response(system_prompt: str, user_prompt: str, model: str) -> Dict:
 
     global client
     
     if client is None:
         raise ValueError("OpenAI client not initialized. Call initialize_client first.")
 
-    response = client.beta.chat.completions.parse(
+    response = await client.beta.chat.completions.parse(
         model=model,
         messages=[
             {"role": "system", "content": system_prompt},
@@ -74,7 +73,7 @@ def generate_response(system_prompt: str, user_prompt: str, model: str) -> Dict:
     return {"score": res.score, "reason": res.reason}
 
 
-def evaluate_faithfulness(
+async def evaluate_faithfulness(
     query: str, answer: str, context: List[str], model: str
 ):
     system_prompt = "You are an impartial judge evaluating the faithfulness of an answer to a question based on given context. Analyze the answer's claims, determine if each claim can be inferred from the context, and calculate a faithfulness score. Be objective and thorough in your assessment."
@@ -140,11 +139,11 @@ def evaluate_faithfulness(
     Include the final faithfulness evaluation with the score and reason.
     """
 
-    response = generate_response(system_prompt, user_prompt, model)
+    response = await generate_response(system_prompt, user_prompt, model)
     return response
 
 
-def evaluate_relevance(
+async def evaluate_relevance(
     query: str, answer: str, context: List[str], model: str
 ):
     system_prompt = "You are an AI assistant specialized in evaluating the relevancy of answers to questions. Your task is to generate artificial questions based on a given answer, compare them to the original question, and calculate an Answer Relevancy score. Use your language understanding to conceptualize semantic similarities without performing actual mathematical calculations."
@@ -207,11 +206,11 @@ def evaluate_relevance(
     [Brief interpretation of the score and what it means for the answer's relevancy]
     """
 
-    response = generate_response(system_prompt, user_prompt, model)
+    response = await generate_response(system_prompt, user_prompt, model)
     return response
 
 
-def evaluate_context_precision(
+async def evaluate_context_precision(
     query: str, answer: str, context: List[str], model: str
 ):
     system_prompt = "You are an AI assistant specialized in evaluating the precision of context chunks for given questions. Your task is to assess the relevance of each context chunk, calculate precision at various ranks, and compute an overall Context Precision score. Use your understanding of the question, ground truth, and contexts to make objective assessments and perform accurate calculations."
@@ -277,11 +276,11 @@ def evaluate_context_precision(
     [Brief interpretation of the score and what it means for the context precision]
     """
 
-    response = generate_response(system_prompt, user_prompt, model)
+    response = await generate_response(system_prompt, user_prompt, model)
     return response
 
 
-def evaluate_context_relevancy(query: str, context: List[str], model: str):
+async def evaluate_context_relevancy(query: str, context: List[str], model: str):
     system_prompt = "You are an AI assistant specialized in evaluating the relevancy of retrieved context for given questions. Your task is to analyze individual sentences, determine their relevance to the question, and compute an overall Context Relevancy score. Use your understanding of the question and context to make objective assessments and perform accurate calculations."
 
     user_prompt = f"""
@@ -337,11 +336,11 @@ def evaluate_context_relevancy(query: str, context: List[str], model: str):
     [Brief interpretation of the score and what it means for the context relevancy]
     """
 
-    response = generate_response(system_prompt, user_prompt, model)
+    response = await generate_response(system_prompt, user_prompt, model)
     return response
 
 
-def evaluate_context_recall(
+async def evaluate_context_recall(
     answer: str, context: List[str], model: str
 ):
     system_prompt = "You are an AI assistant specialized in evaluating the recall of retrieved context compared to ground truth answers. Your task is to analyze individual sentences from the ground truth, determine their attribution to the retrieved context, and compute an overall Context Recall score. Use your understanding of the ground truth and context to make objective assessments and perform accurate calculations."
@@ -397,11 +396,11 @@ def evaluate_context_recall(
     [Brief interpretation of the score and what it means for the context recall]
     """
 
-    response = generate_response(system_prompt, user_prompt, model)
+    response = await generate_response(system_prompt, user_prompt, model)
     return response
 
 
-def evaluate_context_entities_recall(
+async def evaluate_context_entities_recall(
     ground_truth: List[str], context: List[str], model: str
 ):
     system_prompt = "You are an AI assistant specialized in evaluating the recall of entities in retrieved context compared to ground truth. Your task is to identify entities in both the ground truth and context, compare these sets, and compute a Context Entities Recall score. Use your understanding of entity recognition to make thorough identifications and perform accurate calculations."
@@ -463,11 +462,11 @@ def evaluate_context_entities_recall(
     [Brief interpretation of the score and what it means for the context entities recall]
     """
 
-    response = generate_response(system_prompt, user_prompt, model)
+    response = await generate_response(system_prompt, user_prompt, model)
     return response
 
 
-def evaluate_answer_semantic_similarity(
+async def evaluate_answer_semantic_similarity(
     answer: str, ground_truth: List[str], model: str
 ):
     system_prompt = "You are an AI assistant specialized in evaluating the semantic similarity between generated answers and ground truth answers. Your task is to analyze the content, structure, and meaning of both answers, and compute an Answer Semantic Similarity score. Use your understanding of language and semantics to make thorough comparisons and provide a justified similarity score."
@@ -531,11 +530,11 @@ def evaluate_answer_semantic_similarity(
     [Detailed explanation of the score, referencing specific aspects of the analysis]
     """
 
-    response = generate_response(system_prompt, user_prompt, model)
+    response = await generate_response(system_prompt, user_prompt, model)
     return response
 
 
-def evaluate_answer_correctness(
+async def evaluate_answer_correctness(
     answer: str, ground_truth: List[str], model: str
 ):
     system_prompt = "You are an AI assistant specialized in evaluating the correctness of generated answers compared to ground truth answers. Your task is to assess both semantic and factual similarity, combine these assessments into a weighted score, and optionally apply a threshold for binary classification. Use your understanding of language and facts to make thorough comparisons and provide justified scores."
@@ -614,5 +613,5 @@ def evaluate_answer_correctness(
     [Brief interpretation of the score and what it means for the answer's correctness]
     """
 
-    response = generate_response(system_prompt, user_prompt, model)
+    response = await generate_response(system_prompt, user_prompt, model)
     return response
