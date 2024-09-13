@@ -5,6 +5,8 @@ from typing import Dict, Any, List
 from openai import AsyncOpenAI
 from pydantic import BaseModel
 
+import asyncio
+
 
 client = None  # Global variable to store the OpenAI client
 
@@ -28,24 +30,31 @@ async def evaluate_rag(data: Dict[str, Any], api_key: str, model: str) -> Dict[s
     context = data.get("generate", {}).get("sources", [])
     ground_truth = data.get("ground_truth")  # Now it's None if not present
 
+    # Run all evaluations in parallel
+    task_faithfulness = asyncio.create_task(evaluate_faithfulness(query, answer, context, model))
+    task_context_precision = asyncio.create_task(evaluate_context_precision(query, answer, context, model))
+    task_relevance = asyncio.create_task(evaluate_relevance(query, answer, context, model))
+    task_context_recall = asyncio.create_task(evaluate_context_recall(answer, context, model))
+    task_context_relevancy = asyncio.create_task(evaluate_context_relevancy(query, context, model))
+    if ground_truth: 
+        task_context_entities_recall = asyncio.create_task(evaluate_context_entities_recall(ground_truth, context, model))
+        task_answer_semantic_similarity = asyncio.create_task(evaluate_answer_semantic_similarity(answer, ground_truth, model))
+        task_answer_correctness = asyncio.create_task(evaluate_answer_correctness(answer, ground_truth, model))
+
     results = {
-        "Faithfulness": await evaluate_faithfulness(query, answer, context, model),
-        "Context Precision": await evaluate_context_precision(query, answer, context, model),
-        "Relevance": await evaluate_relevance(query, answer, context, model),
-        "Context Recall": await evaluate_context_recall(answer, context, model),
-        "Context Relevancy": await evaluate_context_relevancy(query, context, model),
+        "Faithfulness": await task_faithfulness,
+        "Context Precision": await task_context_precision,
+        "Relevance": await task_relevance,
+        "Context Recall": await task_context_recall,
+        "Context Relevancy": await task_context_relevancy,
     }
 
     # Only include evaluations that require ground truth if it's available
     if ground_truth:
         results.update({
-            "Context Entities Recall": await evaluate_context_entities_recall(
-                ground_truth, context, model
-            ),
-            "Answer Semantic Similarity": await evaluate_answer_semantic_similarity(
-                answer, ground_truth, model
-            ),
-            "Answer Correctness": await evaluate_answer_correctness(answer, ground_truth, model),
+            "Context Entities Recall": await task_context_entities_recall,
+            "Answer Semantic Similarity": await task_answer_semantic_similarity,
+            "Answer Correctness": await task_answer_correctness,
         })
 
     return results
